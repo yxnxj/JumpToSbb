@@ -3,6 +3,9 @@ package com.ll.exam.sbb;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 @Controller
 public class MainController {
     private int i = 0;
@@ -73,5 +76,27 @@ public class MainController {
         return """
                 <h1>increase : %d</h1>
                 """.formatted(i);
+    }
+
+    @GetMapping("/gugudan")
+    @ResponseBody
+    public String gugudan(@RequestParam(defaultValue = "1") int num, @RequestParam(defaultValue = "9") int limit) {
+
+        return IntStream.rangeClosed(1, limit)
+                .mapToObj(i -> "%d x %d = %d".formatted(num, i, num * i))
+                .collect(Collectors.joining("<br>\n"));
+
+    }
+
+    @GetMapping("/mbti")
+    @ResponseBody
+    public String getMbti(@RequestParam(defaultValue = "") String name) {
+        switch(name){
+            case "홍길동" : return "INFP";
+            case "홍길순" : return "ENFP";
+            case "임꺽정" : return "INFJ";
+            case "본인" : return "INTJ";
+            default : return "이름 입력";
+        }
     }
 }
