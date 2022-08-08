@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
+    private int i = 0;
+
+
     @RequestMapping("/sbb")
     // 아래 함수의 리턴값을 그대로 브라우저에 표시
     // 아래 함수의 리턴값을 문자열화 해서 브라우저 응답의 바디에 담는다.
@@ -43,5 +46,32 @@ public class MainController {
                 <h1>입력된 나이 : %d</h1>
                 <h1>안녕하세요, Get 방식으로 오셨군요.</h1>
                 """.formatted(age);
+    }
+
+    @GetMapping("/plus")
+    @ResponseBody
+    public String doPlus(@RequestParam(defaultValue = "0") int a, @RequestParam int b) {
+        return """
+                <h1>%d + %d = %d</h1>
+                """.formatted(a, b, a+b);
+    }
+
+    @GetMapping("/minus")
+    @ResponseBody
+    public String doMinus(@RequestParam(defaultValue = "0") int a, @RequestParam int b) {
+        return """
+                <h1>%d - %d = %d</h1>
+                """.formatted(a, b, a-b);
+    }
+
+
+    @GetMapping("/increase")
+    @ResponseBody
+    public String doIncrease() {
+        i++;
+
+        return """
+                <h1>increase : %d</h1>
+                """.formatted(i);
     }
 }
