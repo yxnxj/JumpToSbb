@@ -15,6 +15,7 @@ import java.util.stream.IntStream;
 public class MainController {
     private int i = 0;
     private List<Article> articleList = new ArrayList<>();
+    private List<Person> personList = new ArrayList<>();
     @RequestMapping("/sbb")
     // 아래 함수의 리턴값을 그대로 브라우저에 표시
     // 아래 함수의 리턴값을 문자열화 해서 브라우저 응답의 바디에 담는다.
@@ -178,5 +179,14 @@ public class MainController {
         articleList.remove(article);
 
         return Integer.valueOf(id).toString() + "번 게시물이 삭제되었습니다.";
+    }
+
+    @GetMapping("/addPerson")
+    @ResponseBody
+    public String addPerson(Person person){
+        person.setId(++Person.lastId);
+        personList.add(person);
+
+        return person.getId() + ", " + person.getName() + ", " + person.getAge() + " 이 생성되었습니다.";
     }
 }
