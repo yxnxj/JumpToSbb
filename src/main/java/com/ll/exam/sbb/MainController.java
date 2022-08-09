@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -139,5 +140,26 @@ public class MainController {
 
         return article;
 
+    }
+
+    @GetMapping("/modifyArticle")
+    @ResponseBody
+    public String modifyArticle(@RequestParam int id, @RequestParam String title, @RequestParam String body){
+        Optional<Article> optionalArticle = articleList
+                .stream()
+                .filter(a -> a.getId() == id)
+                .findFirst();
+        if(optionalArticle.isEmpty())
+            return "게시물이 존재하지 않습니다.";
+
+        Article article = optionalArticle.get();
+
+        article.setBody(body);
+        article.setTitle(title);
+
+        int index = articleList.indexOf(article);
+        articleList.set(index, article);
+
+        return article.getId().toString() + "게시물이 수정되었습니다.";
     }
 }
