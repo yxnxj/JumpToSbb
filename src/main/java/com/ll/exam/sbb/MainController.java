@@ -181,7 +181,7 @@ public class MainController {
         return Integer.valueOf(id).toString() + "번 게시물이 삭제되었습니다.";
     }
 
-    @GetMapping("/addPerson")
+    @GetMapping("/addPerson/{id}")
     @ResponseBody
     public String addPerson(Person person){
         person.setId(++Person.lastId);
