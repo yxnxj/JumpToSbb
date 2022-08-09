@@ -162,4 +162,21 @@ public class MainController {
 
         return article.getId().toString() + "게시물이 수정되었습니다.";
     }
+
+    @GetMapping("/deleteArticle")
+    @ResponseBody
+    public String deleteArticle(@RequestParam int id){
+        Optional<Article> optionalArticle = articleList
+                .stream()
+                .filter(a -> a.getId() == id)
+                .findFirst();
+        if(optionalArticle.isEmpty())
+            return "게시물이 존재하지 않습니다.";
+
+        Article article = optionalArticle.get();
+
+        articleList.remove(article);
+
+        return Integer.valueOf(id).toString() + "번 게시물이 삭제되었습니다.";
+    }
 }
