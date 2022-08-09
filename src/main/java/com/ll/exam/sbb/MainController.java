@@ -104,7 +104,7 @@ public class MainController {
     @GetMapping("/saveSession/{name}/{value}")
     @ResponseBody
     public String saveSession(@PathVariable String name, @PathVariable String value, HttpServletRequest req) {
-        HttpSessgiion session = req.getSession();
+        HttpSession session = req.getSession();
 
         session.setAttribute(name, value);
 
