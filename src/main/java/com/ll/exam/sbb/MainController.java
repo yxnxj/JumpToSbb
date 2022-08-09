@@ -5,13 +5,15 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
 public class MainController {
     private int i = 0;
-
+    private List<Article> articleList = new ArrayList<>();
     @RequestMapping("/sbb")
     // 아래 함수의 리턴값을 그대로 브라우저에 표시
     // 아래 함수의 리턴값을 문자열화 해서 브라우저 응답의 바디에 담는다.
@@ -117,5 +119,25 @@ public class MainController {
         String value = (String) session.getAttribute(name);
 
         return "세션변수 %s의 값이 %s 입니다.".formatted(name, value);
+    }
+
+    @GetMapping("/addArticle")
+    @ResponseBody
+    public String addArticle(@RequestParam String title, @RequestParam String body){
+        Article article = new Article(title, body);
+        articleList.add(article);
+        return article.getId().toString() + "번 글이 등록되었습니다.";
+    }
+
+    @GetMapping("/article/{id}")
+    @ResponseBody
+    public Article getArticle(@PathVariable int id){
+        Article article = articleList
+                .stream()
+                .filter(a -> a.getId() == id)
+                .findFirst().get();
+
+        return article;
+
     }
 }
