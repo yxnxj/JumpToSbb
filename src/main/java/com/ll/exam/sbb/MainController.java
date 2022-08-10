@@ -1,5 +1,7 @@
 package com.ll.exam.sbb;
 
+import com.ll.exam.sbb.model.Article;
+import com.ll.exam.sbb.model.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
