@@ -42,9 +42,16 @@ public class SbbApplicationTests {
     void testJpa2() {
         // SELECT * FROM question
         List<Question> all = questionRepository.findAll();
-        assertEquals(4, all.size());
+        assertEquals(2, all.size());
 
         Question q = all.get(0);
         assertEquals("sbb가 무엇인가요?", q.getSubject());
+    }
+
+    @Test
+    void testJpa3() {
+        // SELECT * FROM question
+        Question q = questionRepository.findBySubject("sbb가 무엇인가요?");
+        assertEquals(1, q.getId());
     }
 }
