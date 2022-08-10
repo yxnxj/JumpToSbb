@@ -186,8 +186,8 @@ public class MainController {
     @GetMapping("/addPerson/{id}")
     @ResponseBody
     public String addPerson(Person person){
-        person.setId(++Person.lastId);
         personList.add(person);
+
 
         return person.getId() + ", " + person.getName() + ", " + person.getAge() + " 이 생성되었습니다.";
     }

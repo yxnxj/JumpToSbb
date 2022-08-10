@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Person {
-    static Integer lastId = 0;
+    public static Integer lastId = 0;
 
     private int id;
     private int age;
@@ -18,6 +18,7 @@ public class Person {
 
 
     public Person(int age, String name) {
+        this.id = ++lastId;
         this.age = age;
         this.name = name;
     }
