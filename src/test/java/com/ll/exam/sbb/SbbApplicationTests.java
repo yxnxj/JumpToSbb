@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 public class SbbApplicationTests {
     @Autowired
@@ -27,5 +29,8 @@ public class SbbApplicationTests {
         q2.setCreateDate(LocalDateTime.now());
 
         questionRepository.save(q2);
+
+        assertThat(q1.getId()).isGreaterThan(0);
+        assertThat(q2.getId()).isGreaterThan(q1.getId());
     }
 }
