@@ -1,4 +1,4 @@
-package com.ll.exam.sbb;
+package com.ll.exam.sbb.controller;
 
 import com.ll.exam.sbb.model.Article;
 import com.ll.exam.sbb.model.Person;
