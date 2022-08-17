@@ -9,3 +9,12 @@ html > body {
     font-family: "GmarketSansMedium";
     text-underline-position: under;
 }
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #A1B6E0 ;
+    border-color: #A1B6E0 ;
+}
+
+.table-header{
+    background-color: #DFE6F3;
+}
