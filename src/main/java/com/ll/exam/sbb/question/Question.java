@@ -1,11 +1,12 @@
-package com.ll.exam.sbb.model;
+package com.ll.exam.sbb.question;
 
-import com.ll.exam.sbb.model.Answer;
+import com.ll.exam.sbb.answer.Answer;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -22,6 +23,11 @@ public class Question {
     private String content;
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-    private List<Answer> answerList;
+    @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL})
+    private List<Answer> answerList = new ArrayList<>();
+
+    public void addAnswer(Answer answer) {
+        answer.setQuestion(this);
+        getAnswerList().add(answer);
+    }
 }
