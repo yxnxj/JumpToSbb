@@ -1,5 +1,6 @@
 package com.ll.exam.sbb.question;
 
+import com.ll.exam.sbb.answer.AnswerForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ public class QuestionController {
     // @Autowired // 필드 주입
     private final QuestionService questionService;
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
     // 이 자리에 @ResponseBody가 없으면 resources/question_list/question_list.html 파일을 뷰로 삼는다.
     public String list(Model model) {
         List<Question> questionList = questionService.getList();
@@ -39,8 +40,8 @@ public class QuestionController {
         return "question_list";
     }
 
-    @RequestMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable int id) {
+    @GetMapping("/detail/{id}")
+    public String detail(Model model, @PathVariable int id, AnswerForm answerForm) {
         Question question = questionService.getQuestion(id);
 
         model.addAttribute("question", question);
