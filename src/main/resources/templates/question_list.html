@@ -1,6 +1,6 @@
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:th="http://www.thymeleaf.org"
+        xmlns:th="http://thymeleaf.org"
         layout:decorate="~{layout}">
 
 <div layout:fragment="content" class="container my-3">
@@ -13,7 +13,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="question, loop : ${questionList}">
+        <tr th:each="question, loop : ${paging}">
             <td th:text="${loop.count}"></td>
             <td>
                 <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
