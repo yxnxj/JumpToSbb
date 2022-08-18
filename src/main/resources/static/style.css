@@ -11,10 +11,40 @@ html > body {
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: #A1B6E0 ;
-    border-color: #A1B6E0 ;
+    background-color: #3C64B1 ;
+    border-color: #3C64B1 ;
 }
 
 .table-header{
     background-color: #DFE6F3;
+}
+
+
+.pagination > li > a
+{
+    background-color: white;
+    color: #A1B6E0;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #A1B6E0 ;
+    border: solid 1px #A1B6E0 ;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: #A1B6E0;
+    border: solid 1px #A1B6E0;
 }
