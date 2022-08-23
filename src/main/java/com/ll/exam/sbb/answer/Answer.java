@@ -29,5 +29,5 @@ public class Answer {
     private SiteUser author;
 
     @ManyToMany
-    Set<SiteUser> voter;
+    List<SiteUser> voter;
 }
