@@ -49,7 +49,7 @@ public class AnswerController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
     public String answerModify(AnswerForm answerForm, @PathVariable("id") Integer id, Principal principal) {
-        Answer answer = this.answerService.getAnswer(id);
+        Answer answer = this.answerService.getAnswer(Long.valueOf(id));
 
         if ( answer == null ) {
             throw new DataNotFoundException("데이터가 없습니다.");
@@ -67,8 +67,19 @@ public class AnswerController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
-    @ResponseBody
     public String answerModify(@Valid AnswerForm answerForm, BindingResult bindingResult, @PathVariable("id") Long id, Principal principal) {
-        return answerForm.getContent();
+        if (bindingResult.hasErrors()) {
+            return "answer_form";
+        }
+
+        Answer answer = answerService.getAnswer(id);
+
+        if (!answer.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+
+        answerService.modify(answer, answerForm.getContent());
+
+        return "redirect:/question/detail/%d".formatted(answer.getQuestion().getId());
     }
 }
